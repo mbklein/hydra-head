@@ -22,7 +22,9 @@ module Hydra
       protected
 
       def load_asset
-        @asset = ActiveFedora::Base.find(params[:id], :cast=>true)
+        @asset = ActiveFedora::Base.load_instance_from_solr(params[:id])
+        #@asset = ActiveFedora::Base.find(params[:id], cast:true)
+        puts "Asset is: #{@asset}"
       end
 
       def load_datastream
@@ -66,6 +68,7 @@ module Hydra
           send_range(datastream)
         else
           send_file_headers! content_options
+          puts "Datastream: #{datastream.inspect}"
           self.response_body = datastream.stream
         end
       end

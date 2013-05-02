@@ -16,7 +16,6 @@ describe DownloadsController do
   describe "with a file" do
     before do
       @user = User.create!(email: 'email@example.com', password: 'password')
-      @obj = ActiveFedora::Base.new
       @obj = ModsAsset.new
       @obj.label = "world.png"
       @obj.add_file_datastream('foobarfoobarfoobar', :dsid=>'content', :mimeType => 'image/png')
